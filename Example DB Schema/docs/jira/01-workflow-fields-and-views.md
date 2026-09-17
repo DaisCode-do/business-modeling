@@ -1,6 +1,6 @@
 # Workflow, fields, and views
 
-This is the minimum useful JPD configuration for requirements discovery. Keep
+This is the minimum useful JPD configuration for business-domain discovery. Keep
 the shared client surface sparse; additional internal detail belongs in hidden
 fields, comments, linked evidence, or the repository documentation.
 
@@ -19,7 +19,7 @@ An item may leave `Draft` when:
 - the relevant current understanding and source are present;
 - it contains one clear request to the client;
 - a decision owner or evidence provider is named; and
-- the answer would change or validate a requirement.
+- the answer would change or validate the business blueprint.
 
 ### Discuss
 
@@ -45,16 +45,18 @@ or decision. The item records:
 - any material exception or scope limit; and
 - any prior understanding it supersedes.
 
-Agreement is current and revisable; it is not a claim that the requirement can
+Agreement is current and revisable; it is not a claim that the business can
 never change.
 
-### Ready
+### Incorporated
 
-The developer considers the agreed outcome safe to use as an implementation or
-prototype input. It has an acceptance example, resolved dependencies relevant
-to the slice, and no unanswered question likely to reverse its boundary.
+The agreed result has been incorporated into the relevant blueprint workflow,
+definition, relationship, lifecycle, boundary, assumption, or decision. The Jira
+item links to the changed section or Git revision.
 
-`Ready` does not mean scheduled, estimated, or promised for a release.
+`Incorporated` does not mean implemented, estimated, scheduled, or automatically
+ready for software development. If the existing board must retain `Ready`, use
+this definition for it during discovery.
 
 ## Minimal fields
 
@@ -65,10 +67,15 @@ attachments where available. Add only these discovery fields initially.
 
 Single select:
 
-- Requirement
-- Question
+- Domain map review
+- Workflow review
+- Concept and lifecycle review
+- Relationship and policy review
+- System boundary
+- Evidence question
 - Business decision
 - Terminology
+- Software requirement
 - Technical decision
 
 If custom JPD idea types are available on the current plan, these values can
@@ -91,12 +98,15 @@ This prevents an inference from looking like a confirmed fact.
 
 Multi-select:
 
-- Identity and access
-- Projects
-- Purchases, payments, and tax
-- Contractors and payroll
-- Budgets and APU
-- Client contracts and billing
+- Foundation
+- Business relationships
+- Projects and contracts
+- Planning and cost control
+- Procurement and supplier obligations
+- Work delivery and capacity
+- Client commercial and billing
+- Finance, accounting, and tax
+- Governance and records
 - Data migration and evidence
 - Architecture
 - Website
@@ -134,6 +144,13 @@ Single select maintained by the developer after reading comments:
 
 Clients should not be required to maintain this field themselves.
 
+### Blueprint target
+
+Hyperlink or short-text field maintained by the developer. It identifies the
+workflow, glossary section, relationship, lifecycle, boundary, assumption, or
+decision expected to change. An item without a plausible blueprint target is
+probably too vague or belongs to delivery rather than discovery.
+
 ## Field visibility
 
 The default `Client Review` card should show only:
@@ -160,14 +177,22 @@ first.
 This is the primary client interaction surface. Comments are the preferred
 asynchronous response channel.
 
-### Requirements Catalogue
+### Blueprint Coverage
 
 Use a list over the same items; do not duplicate them. Show item kind,
-statement class, business area, owner, status, evidence confidence, and last
-update. Group first by business area and then filter as needed.
+statement class, business area, blueprint target, owner, status, evidence
+confidence, and last update. Group first by business area and then filter as
+needed.
 
-This view answers “what do we currently know?” rather than “what must I answer
-today?”
+This view answers “what part of the business model is reviewed, open, or missing?”
+rather than “what must I answer today?”
+
+### Requirements Catalogue
+
+Keep this view empty or limited during foundation discovery. Populate it with
+software requirements derived from an `Incorporated` workflow slice. Link every
+requirement to its blueprint source and originating Jira decisions instead of
+copying unvalidated schema fields into the catalogue.
 
 ### Architecture
 
@@ -180,14 +205,14 @@ but they do not enter the client agreement workflow. Use technical states such
 as `Proposed`, `Accepted`, `Superseded`, and `Rejected` if this view needs its
 own workflow.
 
-The current architectural constraint is that the custom PostgreSQL model
-remains the source-of-truth candidate and `frappe_docker` is only a possible
-future UI/UX reference.
+The current architectural direction is a custom implementation derived from the
+reviewed business model. The PostgreSQL prototype remains a technical
+hypothesis, and `frappe_docker` is only a possible future UI/UX reference.
 
 ### Impact vs Effort
 
 Leave this view empty or hidden during the first cycle. Use it only after an
-item is at least `Agreed` and its boundary is understood. Early numerical
+item is `Incorporated` and its boundary is understood. Early numerical
 estimates would create false confidence.
 
 ### Timeline
@@ -204,7 +229,8 @@ Keep public-site changes separate from the ERP discovery flow. A simple
 ## Ownership and permissions
 
 - **Developer:** owns configuration, descriptions, synthesis, technical
-  decisions, traceability, and movement to `Ready`.
+  decisions, traceability, blueprint incorporation, and movement to
+  `Incorporated`.
 - **Business decision owner:** confirms or rejects policy for their domain.
 - **Process participant:** supplies actual examples, exceptions, corrections,
   and evidence.
@@ -226,4 +252,3 @@ communicate, it probably does not deserve a field.
 - [Create and manage custom fields](https://support.atlassian.com/jira-product-discovery/docs/create-and-manage-custom-fields/)
 - [Create and configure idea types](https://support.atlassian.com/jira-product-discovery/docs/create-and-configure-idea-types/)
 - [Create a timeline view](https://support.atlassian.com/jira-product-discovery/docs/create-a-timeline-view/)
-

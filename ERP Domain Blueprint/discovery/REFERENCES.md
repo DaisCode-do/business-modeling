@@ -1,8 +1,17 @@
 # Sources and Design References
 
 These references support discovery and comparison. They are not imported as
-EduGuiders policy. Every external pattern must be validated against the
-institution's actual work before adoption.
+Constructora Angote policy. Every external pattern must be validated against the
+company's actual work before adoption.
+
+## Constructora source material
+
+- Private operational material under `EVIDENCE/`.
+- [Evidence source assessment](<../../Example DB Schema/docs/schema/01-source-assessment.md>).
+- [Earlier canonical-model hypothesis](<../../Example DB Schema/docs/schema/02-canonical-model.md>).
+- [Earlier business-rule hypotheses](<../../Example DB Schema/docs/schema/03-business-rules.md>).
+- [Migration findings](<../../Example DB Schema/docs/schema/04-migration-decisions.md>).
+- [Interactive database prototype](<../../Example DB Schema/docs/erd/index.html>).
 
 ## ERPNext
 
@@ -23,7 +32,7 @@ software.
 
 ## Reference-use policy
 
-- Prefer operational evidence form the company when defining its actual business.
+- Prefer operational evidence from the company when defining its actual business.
 - Use existing products to discover distinctions and questions, not to settle
   policy automatically.
 - Record an adopted choice in the decision log before presenting a borrowed

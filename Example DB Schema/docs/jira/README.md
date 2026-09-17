@@ -1,110 +1,106 @@
 # Jira discovery playbook
 
-This directory turns the existing evidence and prototype into a lightweight,
-traceable client-validation process in **Jira Product Discovery (JPD)**.
+Jira Product Discovery coordinates client review while the
+[ERP Domain Blueprint](<../../../ERP Domain Blueprint/README.md>) becomes the
+versioned source of the accepted business model.
 
-The guiding rule is simple:
+The operating rule is:
 
-> The client supplies corrections, choices, examples, and evidence. The
-> developer converts those inputs into durable requirements and models.
+> The client corrects, chooses, demonstrates, or supplies evidence. The
+> developer prepares the model, records the result, and incorporates it into the
+> blueprint.
 
-The client should not be asked to write specifications or complete long forms.
-A normal review item should take two to five minutes to understand and answer.
-When a subject is too complex for that, use a short conversation and let the
-developer record the result.
+The client is not expected to write requirements, review database tables, or
+complete long questionnaires. A normal Jira item asks for one correction,
+choice, example, file, or decision owner.
 
-## Decisions already made
+## Artifact responsibilities
 
-- The PostgreSQL prototype and ERD are hypotheses backed by evidence, not
-  approved requirements.
-- JPD records business concepts, questions, requirements, and decisions. It
-  does not mirror every database table or field.
-- **Client Review** is the only main interaction surface for discovery
-  participants.
-- The **Architecture** view is maintained by the developer and is read-only for
-  the client. Client requirements can constrain architecture, but clients are
-  not asked to approve implementation mechanics.
-- `frappe_docker` is excluded as an application or data-model candidate. It may
-  later be inspected only for selected UI/UX references.
-- Comments, evidence links, attachments, and Insights should remain attached to
-  the smallest relevant Jira item so the path to agreement is visible.
-- Only three items should normally require client attention at once.
+- **Evidence:** preserves what was supplied, observed, or recorded.
+- **Jira:** manages questions, discussion, evidence requests, ownership, and
+  agreement across participants.
+- **ERP Domain Blueprint:** holds the coherent current business model in Git.
+- **Software requirements:** are derived from sufficiently mature blueprint
+  slices.
+- **Example schema and ERD:** test later requirements and expose technical
+  consequences; they do not drive discovery order.
+- **Architecture:** is maintained by the developer and shown to the client for
+  context.
 
-## First recommended Jira moves
+The traceability chain is:
 
-Perform these in order. They are setup actions, not new ERP requirements.
+**Evidence → Jira review → domain decision → blueprint revision → software
+requirement → architecture/schema/prototype → verification**
 
-1. **Name the participants and decision owners.** Start with the
-   administrator/owner, accountant, project or operations representative, and
-   the developer. A process expert may explain a workflow without owning its
-   policy decision.
-2. **Configure the five review statuses.** Use `Draft`, `Discuss`, `Evidence
-   Needed`, `Agreed`, and `Ready` with the gates in
-   [workflow, fields, and views](01-workflow-fields-and-views.md).
-3. **Create only the minimal fields.** Add `Item kind`, `Statement class`,
-   `Business area`, `Decision owner`, `Evidence confidence`, and `Review
-   response`. Do not expose all of them in the client board.
-4. **Create the views.** Build `Client Review`, `Requirements Catalogue`, and
-   the developer-managed `Architecture` view. Leave prioritization and timeline
-   views lightly configured until requirements are understood.
-5. **Install the concise description templates.** Use the templates in
-   [item templates](03-item-templates.md); do not give the client a blank essay
-   prompt.
-6. **Create the first nine discovery items.** Copy them from
-   [the first Jira batch](04-first-jira-batch.md), but expose only the first
-   three in `Discuss` or `Evidence Needed`. Leave the remaining six in `Draft`.
-7. **Prepare evidence before inviting answers.** Attach or link the smallest
-   safe excerpt, example, or proposed mapping needed for each active item. Do
-   not ask the client to search through the repository.
-8. **Run a short orientation.** Explain the board in ten minutes, then review
-   one real card together. The acceptable client responses are: agree, choose
-   an option, correct a statement, provide an example, attach a file, or name
-   the right person.
-9. **Consolidate the outcome.** Before the next review, update the description,
-   record the decision and source, preserve exceptions, and move the card only
-   when its status gate is satisfied.
+## First moves for the 2026-09-18 meeting
 
-## Recommended operating limit
+1. Confirm the participants and distinguish process experts, evidence holders,
+   and actual decision owners.
+2. Change the last discovery status from `Ready` to `Incorporated`, or redefine
+   `Ready` as “incorporated and ready for requirements derivation” if the board
+   cannot be changed before the meeting.
+3. Add `Blueprint target` as a link or short-text field.
+4. Update `Item kind` and `Business area` using
+   [the workflow and field guide](01-workflow-fields-and-views.md).
+5. Create only the first three items from
+   [the blueprint-centered first batch](04-first-jira-batch.md).
+6. Attach or link the proposed Business Context and Domain Map; do not ask the
+   client to search the repository.
+7. Follow the [meeting plan](08-client-meeting-2026-09-18.md).
+8. After the meeting, incorporate accepted corrections into the blueprint before
+   closing the Jira items.
 
-Use a small review window:
+## Discovery workflow
+
+Use:
+
+**Draft → Discuss ↔ Evidence Needed → Agreed → Incorporated**
+
+`Agreed` means the responsible business owner explicitly confirmed the outcome.
+`Incorporated` means the accepted result is represented in the blueprint and
+linked back to the Jira item. It does not mean implemented, estimated, or
+scheduled.
+
+## Operating limit
 
 - **Active:** no more than three items awaiting client action.
-- **Prepared queue:** no more than six additional `Draft` items.
-- **Catalogue:** everything else stays captured but does not demand attention.
+- **Prepared queue:** no more than six connected `Draft` items.
+- **Catalogue:** everything else remains visible without demanding attention.
 
-This limit protects the client from questionnaire fatigue and protects a solo
-developer from having dozens of partially resolved conversations at once.
+This prevents questionnaire fatigue and keeps the solo-developer workload
+coherent.
 
-## Documents in this directory
+## Documents
 
-1. [Workflow, fields, and views](01-workflow-fields-and-views.md) — the minimum
-   JPD configuration and ownership model.
-2. [Client review method](02-client-review-method.md) — how to make validation
-   easy for non-technical participants.
-3. [Item templates](03-item-templates.md) — copy-ready structures for questions,
-   decisions, requirements, terminology, and architecture notes.
-4. [First Jira batch](04-first-jira-batch.md) — nine high-value items derived
-   from current evidence, sequenced in three waves.
+1. [Workflow, fields, and views](01-workflow-fields-and-views.md) — minimal JPD
+   configuration aligned with the blueprint.
+2. [Client review method](02-client-review-method.md) — low-effort participation
+   and short review sessions.
+3. [Item templates](03-item-templates.md) — concise questions, decisions,
+   evidence requests, and outcome records.
+4. [First Jira batch](04-first-jira-batch.md) — the blueprint foundation and
+   first workflow selection.
 5. [Evidence, agreement, and versioning](05-evidence-agreement-and-versioning.md)
-   — how comments, files, Insights, and decision records form traceability.
-6. [Cadence and change control](06-cadence-and-change-control.md) — how reviews,
-   schema changes, and future prototypes should proceed.
+   — traceability across evidence, Jira, Git, and downstream artifacts.
+6. [Cadence and change control](06-cadence-and-change-control.md) — how reviewed
+   business meaning becomes requirements and prototypes.
+7. [Deferred schema-validation backlog](07-deferred-schema-validation-backlog.md)
+   — valuable detailed questions activated only when their workflow reaches them.
+8. [Client meeting plan — 2026-09-18](08-client-meeting-2026-09-18.md) — agenda,
+   script, outputs, and post-meeting actions.
 
-## Inputs this playbook relies on
+## Current boundaries
 
-- [Source assessment](../schema/01-source-assessment.md)
-- [Canonical model](../schema/02-canonical-model.md)
-- [Initial business rules](../schema/03-business-rules.md)
-- [Migration decisions](../schema/04-migration-decisions.md)
-- [Requirements and prototype plan](../schema/05-requirements-plan.md)
-- [Interactive ERD](../erd/index.html)
+- The example PostgreSQL schema remains a fragile technical hypothesis.
+- `frappe_docker` is excluded as a platform and canonical model; selected UI/UX
+  interactions may be consulted later.
+- The Architecture view is developer-managed and client-viewable.
+- EduGuiders demonstrates the documentation method, but its terminology,
+  workflows, policies, and conclusions are not Constructora requirements.
 
-## What success looks like
+## Success signal
 
-The first cycle is successful when the company has supplied enough evidence and
-decisions to make a small part of the prototype safer—not when every Jira field
-is populated. The desired chain is:
-
-**Evidence → current interpretation → focused client response → recorded
-agreement → revised requirement/rule → justified schema or prototype change**
-
+The first cycle succeeds when the company has corrected its high-level business
+map, selected one real workflow, supplied a normal example and an exception, and
+helped produce the first reviewed workflow document. Jira completeness and the
+number of captured fields are not success measures.

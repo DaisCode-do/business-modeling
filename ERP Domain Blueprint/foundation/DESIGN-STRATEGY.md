@@ -2,8 +2,9 @@
 
 ## Intention
 
-This blueprint is designed to become a stable business reference for an
-ERP.
+This blueprint is designed to become a stable business reference from which an
+ERP can be specified. It is not a generic ERP feature catalog and it is not a
+translation of the existing database prototype.
 
 ## Core approach
 
@@ -25,8 +26,9 @@ names.
 
 ### 3. Separate domain areas without isolating them
 
-Each domain is documented separately because each has its own language and responsibilities.
-End-to-end workflows cross those boundaries and show how the institution works as one operation.
+Each domain is documented separately because each has its own language and
+responsibilities. End-to-end workflows cross those boundaries and show how the
+company works as one operation.
 
 These areas are documentation boundaries, not predetermined software services or
 databases.
@@ -58,6 +60,24 @@ of them as the model:
 The corresponding official sources and the limited lessons taken from them are
 listed in [References](../discovery/REFERENCES.md).
 
+## Reuse boundary
+
+Reuse should occur at three different levels:
+
+- **Method:** document context, vocabulary, domains, relationships, lifecycles,
+  workflows, decisions, evidence, and open questions in a consistent form.
+- **Stable patterns:** concepts such as party and role, obligation and payment,
+  document and evidence, or planned and actual activity may be proposed when
+  supported by more than one domain.
+- **Company policy:** project stages, approval rules, calculations, document
+  names, responsibilities, exceptions, and regulatory behavior belong only to
+  Constructora after validation.
+
+An apparent reusable pattern remains a proposal until a Constructora workflow
+demonstrates that it preserves the required meaning. Designing for change means
+making policy, relationships, and history explicit; it does not mean promising
+that future requirements will require no software changes.
+
 ## What this strategy excludes
 
 This blueprint does not decide:
@@ -82,5 +102,5 @@ A domain section is mature enough to support later requirements work when:
 - its normal workflows and meaningful exceptions are described;
 - its business decisions and unresolved questions are visible;
 - its dependence on external systems is explicit; and
-- a reader can follow the work without relying on undocumented institutional
+- a reader can follow the work without relying on undocumented company
   knowledge.

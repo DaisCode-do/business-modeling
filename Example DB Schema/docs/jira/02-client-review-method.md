@@ -97,8 +97,10 @@ The developer should:
 2. write a concise outcome comment;
 3. update the maintained current understanding;
 4. record exceptions and unresolved questions;
-5. identify which business rule or model concept is affected; and
-6. move the item only if its workflow gate is satisfied.
+5. identify which blueprint workflow, definition, relationship, lifecycle,
+   boundary, assumption, or decision is affected;
+6. incorporate agreed results into the blueprint; and
+7. move the item to `Incorporated` only when that update is complete.
 
 Do this before the next review, but do not impose a fragile response-time
 promise on a solo-developer workflow.
@@ -123,4 +125,3 @@ reduce the active set—not to create another field.
 - [Create comments inside ideas](https://support.atlassian.com/jira-product-discovery/docs/create-comments-inside-ideas/)
 - [Comment on views](https://support.atlassian.com/jira-product-discovery/docs/comment-views/)
 - [Create insights in an idea](https://support.atlassian.com/jira-product-discovery/docs/create-insights-in-your-idea/)
-

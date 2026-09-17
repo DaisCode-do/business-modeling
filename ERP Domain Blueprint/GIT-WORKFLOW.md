@@ -15,7 +15,10 @@ Git is the only workflow tool required while one person owns discovery and docum
 
 ### `main`
 
-`main` represents the currently accepted documentation baseline. It should remain readable, internally consistent, and free of unfinished experiments.
+`main` represents the current coherent documentation baseline. A statement on
+`main` may still be `Proposed` or `Open` when labeled accordingly; inclusion does
+not falsely convert it into client-approved policy. The branch should remain
+readable, internally consistent, and free of unfinished editing experiments.
 
 ### Short-lived working branches
 
@@ -85,7 +88,7 @@ Recommended kinds:
 - `decision` — records or applies a resolved question;
 - `discovery` — adds assumptions, sources, or open questions;
 - `docs` — improves navigation or explanatory material;
-- `maintenance` — formatting or non-semantic cleanup. ``
+- `maintenance` — formatting or non-semantic cleanup.
 
 A commit body is useful when the reason is not obvious.
 
@@ -98,6 +101,7 @@ A decision branch should normally update all affected views in the same change:
 3. Update the relevant workflow.
 4. Update the domain definition, glossary, relationships, or lifecycle only where the decision changes them.
 5. Update assumptions that the decision confirms or disproves.
+6. Record the Jira key or review link where it materially improves traceability.
 
 Do not create a decision record for spelling corrections or ordinary elaboration. Use it for choices that constrain future interpretation of the domain.
 
@@ -118,7 +122,7 @@ Before merging a semantic change, confirm:
 For the current blueprint, formatting can be checked with:
 
 ```bash
-find "SMBERP Domain Blueprint" -type f -name '*.md' -print0 \
+find "ERP Domain Blueprint" -type f -name '*.md' -print0 \
   | xargs -0 prettier --check
 ```
 
@@ -146,11 +150,12 @@ git tag -a domain-v0.1 -m "Initial domain blueprint"
 git push origin domain-v0.1
 ```
 
-Suggested progression:
+The existing `domain-v0` tag identifies the seeded, unreviewed starting point.
+Suggested progression from it:
 
-- `domain-v0.1` — initial proposed blueprint;
-- `domain-v0.2` — primary workflows reviewed;
-- `domain-v0.3` — ownership and finance boundaries reviewed;
+- `domain-v0.1` — domain map and first primary workflow reviewed;
+- `domain-v0.2` — project foundation and first connected workflows reviewed;
+- `domain-v0.3` — major ownership, system, and finance boundaries reviewed;
 - `domain-v1.0` — business model accepted as the basis for software requirements.
 
 These versions measure documentation maturity, not software releases.

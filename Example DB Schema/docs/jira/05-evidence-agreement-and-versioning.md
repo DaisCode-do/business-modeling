@@ -4,18 +4,21 @@ Jira should make it possible to answer three questions later:
 
 1. What evidence or conversation produced this understanding?
 2. Who confirmed the business decision, and what exactly was confirmed?
-3. Which requirement, model, or prototype changed because of it?
+3. Which blueprint statement, requirement, model, or prototype changed because
+   of it?
 
 The process must provide that traceability without making the client maintain a
 formal audit system.
 
 ## Give each Jira feature one job
 
-### Description — maintained current understanding
+### Description — maintained review proposition
 
-The developer keeps the description concise and current. Update it after a
-material correction; do not append every historical version to the description.
-Its `Recorded outcome` section should match the latest accepted understanding.
+The developer keeps the Jira description concise and current while review is
+active. It states the proposition, question, evidence, and client request. After
+agreement, the domain blueprint—not the Jira description—owns the durable
+business definition. The item retains a summary and link to the incorporated
+result.
 
 ### Comments — conversation and explicit responses
 
@@ -52,13 +55,12 @@ not assume that they provide semantic document version control. If a file is
 revised, retain the earlier file and explicitly say which attachment supersedes
 it.
 
-### Confluence or repository links — controlled documents
+### Blueprint, Confluence, or repository links — controlled documents
 
-Use a Confluence page/attachment or a repository file when comparison,
-restoration, authorship, or formal revision history matters. Confluence keeps
-page history and attachment versions; Git tracks repository documentation and
-schema changes. Link the controlled source from Jira instead of maintaining
-independent editable copies.
+Use the Git-versioned blueprint for the accepted business model. Use a Confluence
+page/attachment or another controlled repository when comparison, restoration,
+authorship, or formal document revision history matters. Link the controlled
+source from Jira instead of maintaining independent editable specifications.
 
 ## Lightweight file convention
 
@@ -113,6 +115,14 @@ An item may be `Agreed` only when:
 - relied-on evidence is linked or identified; and
 - disagreement among owners is either resolved or clearly scoped.
 
+An `Agreed` item becomes `Incorporated` only when:
+
+- its outcome is applied to the affected blueprint sections;
+- related assumptions, open questions, and decisions are reconciled;
+- the Jira key is recorded in the resulting workflow or decision where useful;
+- the Jira item links to the incorporated version; and
+- the changed blueprint remains internally consistent.
+
 Do not treat any of these as approval:
 
 - no response;
@@ -134,20 +144,24 @@ If participants disagree:
 
 Do not resolve a business disagreement through schema design.
 
-## Requirement and schema traceability
+## Blueprint, requirement, and schema traceability
 
-When an agreed item changes the prototype, record the Jira key in the related
-business-rule or migration document and in the schema change notes or commit.
-The Jira item should link back to the updated artifact.
+When an agreed item changes the business model, record the Jira key in the
+relevant workflow or decision and incorporate the result on a coherent Git
+branch. Software requirements are then derived from that blueprint slice. When a
+later requirement changes the prototype, carry the Jira and blueprint references
+into the schema change notes or commit.
 
 Use this chain:
 
 **Source file / interview → Insight or attachment → Jira item → outcome comment
-→ business rule → schema/prototype revision → verification**
+→ domain decision → blueprint revision → software requirement →
+schema/prototype revision → verification**
 
-An implementation may combine several agreed items. An item may affect several
-tables. This is why Jira must track business meaning rather than mirror the
-database structure.
+An implementation may combine several incorporated items, and one business
+decision may affect several requirements or tables. This is why Jira tracks
+review and the blueprint tracks coherent business meaning rather than either one
+mirroring the database structure.
 
 ## Sensitive and regulated evidence
 
@@ -169,4 +183,3 @@ retention, tax compliance, or legal archiving policy.
 - [Add an attachment to a Jira work item](https://support.atlassian.com/jira-software-cloud/docs/add-an-attachment-to-an-issue/)
 - [Create, update, and manage Confluence content](https://support.atlassian.com/confluence-cloud/docs/create-edit-and-publish-a-page/)
 - [Upload a file and manage attachment versions in Confluence](https://support.atlassian.com/confluence-cloud/docs/upload-a-file/)
-

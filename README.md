@@ -1,115 +1,88 @@
-# Jira Product Discovery — Requirements Engineering Context
+# Constructora Angote ERP — Business Modeling and Discovery
 
-A Jira Product Discovery space called **Constructora Angote ERP** has been created to turn the existing discovery material into a controlled requirements-engineering process.
+This repository is the controlled workspace for understanding Constructora
+Angote's business before deriving software requirements or committing to an ERP
+implementation model.
 
-The existing PostgreSQL prototype, interactive schema map, historical company files, accountant workflow material, meeting information, and previous analyses should be treated as **discovery evidence and proposed models**, not automatically as confirmed requirements.
+The immediate objective is a reviewed **business domain blueprint**: shared
+language, domain boundaries, workflows, relationships, lifecycles, policies,
+system boundaries, evidence, decisions, and unresolved questions. Software
+requirements, prototypes, data models, and architecture are downstream outputs.
 
-The operating playbook and copy-ready first items are in
-[the Jira discovery documentation](docs/jira/README.md).
+## Authority by concern
 
-The immediate objective is **not to exhaustively specify the ERP**. Instead, use the accumulated evidence to identify a sensible first set of business concepts, requirements, uncertainties, and decisions that should enter Jira for structured client validation.
+There is no single artifact that should own every kind of truth.
 
-Client participation must remain lightweight. The developer prepares the
-interpretation and maintains the formal requirement; the client is normally
-asked only to agree, choose, correct, provide one example, attach evidence, or
-identify the proper decision owner. Keep no more than three items awaiting
-client action at once.
+1. **`EVIDENCE/`** preserves supplied operational material and source provenance.
+   Evidence shows what was recorded or said; it does not automatically establish
+   current policy.
+2. **`ERP Domain Blueprint/`** is the versioned source of the currently accepted
+   business model. Proposed statements remain visibly proposed until reviewed.
+3. **Jira Product Discovery** coordinates questions, evidence requests,
+   discussions, decision ownership, and client agreement. Jira is a review
+   workflow, not the permanent business specification.
+4. **`Example DB Schema/`** contains the earlier PostgreSQL prototype, ERD,
+   analysis, and Jira working documents. It is evidence of prior reasoning and a
+   future test instrument—not a constraint on the business model.
+5. **Software requirements and architecture** will be derived after the relevant
+   blueprint slice is mature enough. The developer owns architectural decisions;
+   the client supplies business constraints and validates business meaning.
 
-### Main workflow: Client Review
+The intended traceability chain is:
 
-The central view is a board organized around:
+**Evidence → Jira review → domain decision → blueprint revision → software
+requirement → architecture/schema/prototype → verification**
 
-**Draft → Discuss → Evidence Needed → Agreed → Ready**
+## Repository map
 
-Which will be used to progressively transform what is currently known or inferred into validated business requirements and decisions.
+- [ERP Domain Blueprint](<ERP Domain Blueprint/README.md>) — active business
+  modeling structure and accepted domain documentation.
+- `EVIDENCE/` — private, gitignored source material.
+- [Example DB Schema](<Example DB Schema/docs/prototype-schema-analysis.md>) —
+  fragile initial schema and analysis retained as a reference.
+- [Jira discovery playbook](<Example DB Schema/docs/jira/README.md>) — client
+  review workflow, templates, first items, and meeting preparation.
+- [Meeting plan for 2026-09-18](<Example DB Schema/docs/jira/08-client-meeting-2026-09-18.md>)
+  — the next client conversation and its expected outputs.
 
-Good initial candidates should come from areas where the existing material already provides substantial evidence, particularly concepts represented in the prototype schema and actual accountant/company workflows. Foundational ERP concepts that are relatively independent of company-specific rules may also be useful starting points.
+## Working principles
 
-For each candidate, distinguish between:
+- Model real end-to-end work before screens, features, or tables.
+- Begin with a concrete normal example and one meaningful exception.
+- Separate observed practice, adopted policy, proposed improvement, and open
+  questions.
+- Give the same business term one meaning; introduce a different term when the
+  business genuinely has two concepts.
+- Preserve changing relationships and history instead of reducing everything to
+  mutable attributes.
+- Treat specialized external systems as explicit boundaries rather than assuming
+  that the ERP must replace them.
+- Put company-specific policy in the company model. Reuse the modeling method and
+  stable conceptual patterns, not another company's detailed workflow.
+- Expect some software changes as understanding improves. The goal is controlled,
+  traceable change—not a false promise that a correct system will never evolve.
 
-- **Observed behavior** — directly supported by files, workflows, historical records, videos, etc.
-- **Proposed behavior** — inferred from the prototype/schema or recommended as part of the new ERP.
-- **Uncertainty** — something that appears necessary but cannot yet be established reliably.
-- **Business decision** — something for which multiple valid approaches exist and the client must choose.
-- **Technical decision** — implementation detail that belongs primarily to the developer rather than requiring client approval.
+## Jira's role
 
-Avoid creating Jira items for every table, field, or database relationship. Jira should primarily represent **business concepts and decisions**. The schema can then evolve from those validated requirements.
+The client should not be asked to write specifications. A normal Jira item asks
+for one correction, choice, example, document, or decision owner. The developer
+prepares the interpretation and incorporates the confirmed outcome into the
+blueprint.
 
-For example, rather than reviewing `PaymentAllocation` as a database entity, review the business concept:
+Use no more than three active client-review items at once. The recommended
+discovery states are:
 
-> **Allocation of payments across obligations/projects**
+**Draft → Discuss ↔ Evidence Needed → Agreed → Incorporated**
 
-That discussion can establish whether allocation exists, what can be allocated, whether partial payments are permitted, who performs the allocation, what historical information must remain visible, and exceptional cases. The eventual relational representation remains an engineering concern.
+`Incorporated` means the accepted result is reflected in the domain blueprint;
+it does not mean implemented or scheduled.
 
-### Initial paths through the ERP
+## Current technical boundary
 
-Do not attempt to populate all ~85 prototype entities immediately. Start with a few **vertical business flows** where existing evidence is strongest.
+The PostgreSQL model remains a technical hypothesis until derived from reviewed
+business documentation. The supplied `frappe_docker` material is excluded as an
+application platform and canonical data model; selected interactions may later
+serve only as UI/UX references.
 
-A useful first path is likely:
-
-**People/organizations → roles/relationships → projects/contracts → documents**
-
-This crosses several proposed modules and should expose important dependencies early. Other strong paths can be selected from the source material if the evidence indicates that they are more fundamental.
-
-A second foundational path is likely:
-
-**Projects → purchasing / contractor work → invoices or claims → payments → accounting consequences**
-
-This helps establish the actors and business objects referenced throughout the rest of the ERP.
-
-You should use its existing document analysis to determine the exact starting concepts rather than assuming the prototype schema is correct.
-
-### Relationship with the Jira views
-
-**Client Review** is the primary requirements-validation workspace. Put business concepts, unresolved behavior, proposed rules, important questions, and decisions here and move them through the validation workflow.
-
-**Requirements Catalogue** should provide the more systematic inventory of established/proposed requirements. Client Review represents the _process of reaching agreement_; the catalogue represents the _organized body of requirements_ resulting from that process.
-
-**Impact vs Effort** can later help prioritize sufficiently understood items. Do not assign precise implementation effort to poorly defined requirements merely to fill the matrix.
-
-**Timeline** communicates major phases, dependencies, short/long-term direction, and planned areas of work. It should not imply precision that the current discovery stage cannot support.
-
-**Architecture** documents technical structure and architectural decisions: backend/frontend boundaries, infrastructure, integrations, services, deployment, security approaches, database architecture, etc. It is maintained by the developer and provided to the client for viewing. Business requirements may constrain architecture, but architectural implementation choices do not normally require client approval.
-
-The provided `frappe_docker` repository is not an application-platform or
-source-of-truth candidate. It may later be consulted only as a UI/UX reference
-for selected frontend interactions.
-
-**Website** is a separate product/work stream for the company's existing public website, using prioritization such as Now / Next / Later rather than mixing those changes into core ERP requirements.
-
-### Traceability
-
-Whenever possible, Jira items should retain provenance back to the material already analyzed:
-
-**Source evidence → interpretation/proposal → Jira requirement or decision → agreement → implementation**
-
-Do not convert uncertain AI-derived conclusions into facts. When source materials conflict, are incomplete, or only weakly imply a behavior, create an explicit question or **Evidence Needed** item instead.
-
-Likewise, preserve meaningful changes in understanding. `Agreed` means **currently accepted and safe to use as an implementation input**, not permanently immutable.
-
-### What to produce initially
-
-Use the existing analysis to propose a **small, high-value first batch** for Jira rather than a comprehensive ERP specification.
-
-For each proposed Jira item, provide enough information to make creation/review practical: a concise title, appropriate type/category, the business concept or requirement being established, relevant evidence/source, current understanding, unresolved questions or assumptions, affected business/module areas, and a recommended initial Client Review state.
-
-Prioritize items that either:
-
-1. establish foundational concepts used throughout the ERP,
-2. represent important end-to-end workflows,
-3. expose assumptions currently embedded in the prototype schema,
-4. contain contradictions or insufficient evidence,
-5. require an explicit client/accountant decision before implementation, or
-6. would cause substantial redesign if misunderstood.
-
-The goal of the first pass is therefore **not “document everything we know.”** It is to identify the smallest useful set of questions and requirements that begins converting the existing prototype from an evidence-based hypothesis into an agreed system specification.
-
-### Jira operating documents
-
-- [Entry point and first recommended moves](docs/jira/README.md)
-- [Workflow, fields, and views](docs/jira/01-workflow-fields-and-views.md)
-- [Client review method](docs/jira/02-client-review-method.md)
-- [Copy-ready item templates](docs/jira/03-item-templates.md)
-- [First Jira batch](docs/jira/04-first-jira-batch.md)
-- [Evidence, agreement, and versioning](docs/jira/05-evidence-agreement-and-versioning.md)
-- [Cadence and change control](docs/jira/06-cadence-and-change-control.md)
+The Architecture Jira view is maintained by the developer and exposed to the
+client for context, not technical approval.

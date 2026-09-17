@@ -1,12 +1,18 @@
-# ERP Business Domain Blueprint
+# Constructora Angote ERP Business Domain Blueprint
 
-**Status:** Working foundation  
-**Subject:** Constructora Angote business operations  
-**Audience:** Business owners, domain contributors, analysts, and future product teams
+- **Status:** Seeded discovery structure; business content requires client review
+- **Subject:** Constructora Angote business operations
+- **Audience:** Business owners, domain contributors, analysts, and future product teams
 
-This directory is the working foundation for a durable description of Constructora Angote
-business domain. Its intended destination is an ERP: an internal operational system that
-connects the companies's domains.
+This directory is the working foundation for a durable description of
+Constructora Angote's business domain. Its intended downstream product is an ERP:
+an internal operational system that connects the company's domains without
+forcing the business into the assumptions of the earlier database prototype.
+
+The **documentation method is reusable; the populated model is not**. EduGuiders
+provided a useful worked example of the structure, but none of its education
+concepts or policies should be copied here. This directory must become a
+construction-company model through Constructora evidence and client validation.
 
 The documentation defines the business before anyone defines software. It describes:
 
@@ -23,7 +29,9 @@ derived from a stable domain description.
 
 ## Reading order
 
-These are to be populated as the information is extracted from the clients.
+The first three foundation documents contain proposed material for the initial
+client review. The remaining sections are deliberately incomplete until a real
+workflow is walked through.
 
 1. [Design Strategy](foundation/DESIGN-STRATEGY.md)
 2. [Business Context](foundation/BUSINESS-CONTEXT.md)
@@ -33,7 +41,9 @@ These are to be populated as the information is extracted from the clients.
 6. [Conceptual Relationships](model/RELATIONSHIPS.md)
 7. [Workflow Index](workflows/README.md)
 8. [Open Questions](discovery/OPEN-QUESTIONS.md)
-9. [Git Workflow](GIT-WORKFLOW.md)
+9. [Method Assessment](discovery/METHOD-ASSESSMENT.md)
+10. [Validation Plan](discovery/VALIDATION-PLAN.md)
+11. [Git Workflow](GIT-WORKFLOW.md)
 
 ## Directory structure
 
@@ -58,7 +68,9 @@ Statements can use the following labels when their certainty matters:
 - **Open** — a question or choice that has not been resolved.
 - **Retired** — retained for historical context but no longer applicable.
 
-Unlabeled definitions in this initial set are proposed unless a source or an adopted decision says otherwise.
+Unlabeled definitions in this initial set are proposed unless a source or an
+adopted decision says otherwise. Empty sections are intentional placeholders,
+not evidence that the business concept does not exist.
 
 ## How this set should evolve
 
@@ -70,5 +82,10 @@ Work from workflows toward detail:
 4. Record important policy choices in the decision log.
 5. Link supporting operational evidence without copying sensitive content into the domain definition.
 
-Repository changes should follow the [Git Workflow](GIT-WORKFLOW.md), which keeps accepted documentation on `main`,
-uses short-lived branches for semantic changes, and keeps raw operational evidence outside version control.
+Jira coordinates multi-party review, while this Git repository owns the accepted
+model. When a Jira item is agreed, record its key in the relevant decision or
+section and update the blueprint before marking it `Incorporated`.
+
+Repository changes should follow the [Git Workflow](GIT-WORKFLOW.md), which keeps
+accepted documentation on `main`, uses short-lived branches for semantic
+changes, and keeps raw operational evidence outside version control.

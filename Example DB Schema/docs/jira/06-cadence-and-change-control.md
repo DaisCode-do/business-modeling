@@ -21,18 +21,20 @@ session. Ask for a normal case and one material exception.
 
 ### Synthesize
 
-The developer records outcomes, updates requirement/rule documentation, and
+The developer records outcomes, updates the relevant blueprint views, and
 identifies contradictions or missing evidence.
 
 ### Validate
 
-The named owner confirms the summary. A small prototype or targeted ERD view is
-used only when it can expose a misunderstanding.
+The named owner confirms the summary. The developer incorporates it into the
+blueprint. A small prototype or targeted ERD view is used only when it can expose
+a misunderstanding that prose and examples cannot settle.
 
 ### Change
 
-The developer updates the schema or prototype only after the decision reaches
-the appropriate gate and the impact is documented.
+The developer derives software requirements from the incorporated workflow slice.
+The schema or prototype changes only after those requirements and their impact
+are documented.
 
 Then begin the next wave. There is no benefit in accumulating a large parallel
 queue of half-reviewed requirements.
@@ -41,6 +43,8 @@ queue of half-reviewed requirements.
 
 - The **client board** presents the current business questions and agreed
   outcomes.
+- The **ERP Domain Blueprint** presents the current coherent business model and
+  becomes the source for later software requirements.
 - The **interactive ERD** explains the current model and consequences; it is
   not an approval form.
 - The **Architecture view** communicates technical direction selected and
@@ -49,13 +53,15 @@ queue of half-reviewed requirements.
 - A **screen prototype** is built when seeing or using a workflow will answer a
   question more reliably than discussion alone.
 
-## Schema change gate
+## Requirements and schema change gate
 
-A Jira response does not automatically authorize an immediate DDL edit. Before
+A Jira response does not automatically become a software requirement or authorize
+an immediate DDL edit. First incorporate the result into the blueprint. Before
 changing the prototype schema, record:
 
 - the agreed business statement and Jira key;
-- the affected business rules and domains;
+- the affected blueprint workflow, decision, business rules, and domains;
+- the derived software requirement and acceptance examples;
 - whether the change is conceptual, data-migration, API, UI, or accounting
   behavior;
 - backward/migration consequences;
@@ -63,7 +69,8 @@ changing the prototype schema, record:
 - any still-unconfirmed policy that must remain configurable or unenforced.
 
 Then update the DDL, schema documentation, and ERD together and run the existing
-validation checks.
+validation checks. Compare the result against the blueprint rather than against
+the earlier schema merely for internal consistency.
 
 ## Change states for the fragile prototype
 
@@ -96,7 +103,7 @@ who will evaluate it, and what result would disprove the current model.
 
 ## Handling new findings
 
-When evidence contradicts an `Agreed` or `Ready` item:
+When evidence contradicts an `Agreed` or `Incorporated` item:
 
 1. do not silently rewrite history;
 2. return the item to `Discuss` or create a linked decision if the new scope is
@@ -104,7 +111,9 @@ When evidence contradicts an `Agreed` or `Ready` item:
 3. add the contradictory evidence as an Insight or attachment;
 4. record what prior outcome may be superseded;
 5. obtain the appropriate owner's response; and
-6. assess schema and migration impact before changing implementation.
+6. revise and reincorporate the blueprint result; and
+7. assess requirements, schema, and migration impact before changing
+   implementation.
 
 Changes are expected during discovery. The discipline is to make their reason
 and consequence visible.
@@ -131,10 +140,10 @@ At the end of each review wave, ask:
 - Did every active item receive a useful answer or a named blocker?
 - Did we ask anyone to write information we could have prepared ourselves?
 - Is each agreement attributable to an authorized owner?
-- Can each changed rule be traced to evidence and a Jira key?
+- Can each changed blueprint statement be traced to evidence and a Jira key?
 - Did the model change only where the evidence required it?
 - Are fewer than four items now awaiting client action?
-- Is the next prototype testing a known uncertainty?
+- Is the next activity improving the blueprint, deriving a requirement, or
+  testing a known uncertainty rather than expanding the prototype by habit?
 
 If the answer is no, simplify the next wave before creating more items.
-

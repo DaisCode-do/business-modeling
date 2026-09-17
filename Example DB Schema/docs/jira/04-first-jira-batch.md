@@ -1,380 +1,224 @@
-# First Jira batch
+# First Jira batch — business blueprint foundation
 
-This batch contains nine high-value discovery items derived from the current
-source assessment and prototype rules. Create all nine so the sequence is
-visible, but expose only one wave of three items to the client at a time.
+This batch realigns discovery around the ERP Domain Blueprint. Jira coordinates
+review; the accepted result is incorporated into the Git-versioned blueprint.
+The example database schema is consulted later to test coverage and expose
+conflicts.
 
-The IDs below are planning labels, not assumed Jira keys. Jira will assign the
-actual keys.
+Create the first three items before the client meeting. Keep the second wave in
+`Draft` until the meeting produces the right owners and evidence.
 
-Before copying an item into Jira, replace repository-relative source links with
-a reachable link, Insight, or small attached evidence packet.
+Planning IDs are shown below; Jira assigns the actual keys.
 
-## Wave 1 — establish identity and project meaning
+## Wave 1 — active for the first client meeting
 
-### DISC-01 — Confirm the operating company's legal identity
-
-**Recommended setup**
-
-- Item kind: Question
-- Statement class: Uncertainty
-- Business area: Identity and access; Data migration and evidence
-- Initial status: Evidence Needed
-- Decision owner: Administrator/owner, confirmed with accountant
-- Evidence confidence: Indirect extraction
-
-**Copy-ready description**
-
-```markdown
-## Why this matters
-The company identity controls tax reporting, invoice ownership, and every
-accounting transaction in the ERP.
-
-## Current understanding
-- The RNC `132621468` appears in workbook headers as the reporting company.
-- Three expense rows associate the same number with “La Casa de la Estufa,” so
-  the extracted names cannot safely settle the identity.
-
-## What we need from you
-Please attach or link one current official document showing the company's legal
-name and RNC, or tell us who holds it. Also comment whether `132621468` is the
-correct company RNC.
-
-That is all required; the developer will record the canonical result.
-
-## Recorded outcome — maintained by developer
-Pending evidence.
-```
-
-**Repository provenance:** RF-05 in
-[source assessment](../schema/01-source-assessment.md) and D-01 in
-[business rules](../schema/03-business-rules.md).
-
-### DISC-02 — Approve the first project and alias register
+### DISC-01 — Correct the proposed business-area map
 
 **Recommended setup**
 
-- Item kind: Business decision
-- Statement class: Uncertainty
-- Business area: Projects; Data migration and evidence
-- Initial status: Evidence Needed
-- Decision owner: Administrator/owner or project authority
-- Evidence confidence: Direct source documents plus indirect extraction
-
-**Preparation before client review**
-
-Attach a short, pre-filled register containing the proposed project, code,
-aliases, site, status, and unresolved values. Highlight only the ambiguous rows.
-Include `MISC`, `EUSEBIO`, `???`, `PROYECTOS`, `L`, `LA ESTANCIA`, the combined
-project value, and the documented alias groups. Do not send a blank form.
-
-**Copy-ready description**
-
-```markdown
-## Why this matters
-Purchases, claims, payroll, budgets, and client billing all depend on knowing
-which records refer to the same project.
-
-## Current understanding
-- The extracted list mixes projects, aliases, people, locations, placeholders,
-  and combined project names.
-- Similar spelling may suggest a match, but it cannot approve one.
-- `MISC` is proposed as overhead or temporarily unallocated cost, not a project.
-
-## What we need from you
-Review the attached proposed register and comment only on incorrect or unknown
-rows. Please also confirm who is allowed to approve future project aliases.
-
-## Recorded outcome — maintained by developer
-Pending reviewed register.
-```
-
-**Repository provenance:** RF-07 in
-[source assessment](../schema/01-source-assessment.md), BR-005/BR-006 and D-02
-in [business rules](../schema/03-business-rules.md).
-
-### DISC-03 — Confirm that one person or company may have several roles
-
-**Recommended setup**
-
-- Item kind: Requirement
+- Item kind: Domain map review
 - Statement class: Proposed behavior
-- Business area: Identity and access
+- Business area: Foundation
 - Initial status: Discuss
-- Decision owner: Administrator/owner
-- Evidence confidence: Prototype inference supported by source conflicts
+- Decision owner: Company owner/administrator
+- Blueprint target: `foundation/DOMAIN-MAP.md`
+
+**Preparation**
+
+Attach or present the proposed domain map. Use the
+[repository version](<../../../ERP Domain Blueprint/foundation/DOMAIN-MAP.md>)
+as the maintained draft.
 
 **Copy-ready description**
 
 ```markdown
 ## Why this matters
-Separate copies of the same person or company create conflicting balances,
-documents, contact details, and tax identities.
 
-## Current understanding
-- One real person or company has one master identity.
-- That identity may be a supplier, contractor, client, employee, owner, or
-  contact at the same time.
-- Roles and their dates are recorded without duplicating the identity.
+We need a shared map of the business before we divide it into workflows,
+requirements, screens, or database areas.
+
+## Proposed areas
+
+- Business Relationships
+- Projects and Contracts
+- Planning and Cost Control
+- Procurement and Supplier Obligations
+- Work Delivery and Capacity
+- Client Commercial and Billing
+- Finance, Accounting, and Tax
+- Governance and Records
+
+Fleet/equipment is currently treated as a possible later area.
 
 ## What we need from you
-Comment **Agree**, or give one case where the same person/company must remain as
-separate identities rather than one identity with several roles.
 
-## Evidence considered
-The alleged client and employee files contain copied contractor data, so their
-labels cannot be trusted as separate master lists.
+Please identify only:
+
+1. an area whose name or boundary is wrong;
+2. an important area that is missing; and
+3. the person who best explains each corrected area.
+
+The developer will update the map; no written specification is required.
 
 ## Recorded outcome — maintained by developer
-Pending.
+
+Pending review.
 ```
 
-**Repository provenance:** RF-08 in
-[source assessment](../schema/01-source-assessment.md) and BR-003 in
-[business rules](../schema/03-business-rules.md).
+**Completion effect:** Correct the domain map and record any material boundary
+choice in the blueprint decision log.
 
-## Wave 2 — separate purchases from settlement
-
-Move this wave out of `Draft` only after Wave 1 has a recorded result or a
-specific external blocker.
-
-### DISC-04 — Decide what `forma_pago` means in the purchase register
+### DISC-02 — Correct the proposed project value streams
 
 **Recommended setup**
 
-- Item kind: Business decision
-- Statement class: Uncertainty
-- Business area: Purchases, payments, and tax
-- Initial status: Draft, then Discuss
-- Decision owner: Accountant
-- Evidence confidence: Direct source document, ambiguous semantics
-
-**Copy-ready description**
-
-```markdown
-## Decision needed
-The purchase sheets contain `forma_pago`, but its value does not by itself prove
-that money moved or an invoice was settled.
-
-## Possible meanings
-- **A — Intended payment method:** how the invoice is expected to be paid.
-- **B — Tax/acquisition classification:** a reporting code rather than payment.
-- **C — Actual settlement:** evidence that payment already happened.
-- **D — Mixed use:** the meaning depends on the workbook or value.
-
-## What we need from you
-Comment **A**, **B**, **C**, or **D**. Please attach one invoice that is paid and
-one that is still owed, with their matching register rows if available.
-
-## Recorded decision — maintained by developer
-Pending accountant confirmation.
-```
-
-**Repository provenance:** D-05 in
-[business rules](../schema/03-business-rules.md) and the purchase migration
-decision in [migration decisions](../schema/04-migration-decisions.md).
-
-### DISC-05 — Confirm partial and grouped payment behavior
-
-**Recommended setup**
-
-- Item kind: Requirement
+- Item kind: Workflow review
 - Statement class: Proposed behavior
-- Business area: Purchases, payments, and tax
-- Initial status: Draft, then Discuss
-- Decision owner: Accountant and payment controller
-- Evidence confidence: Meeting statement plus prototype inference
+- Business area: Foundation; Projects and Contracts
+- Initial status: Discuss
+- Decision owner: Company owner/administrator with project operations input
+- Blueprint target: `foundation/BUSINESS-CONTEXT.md`
 
 **Copy-ready description**
 
 ```markdown
 ## Why this matters
-The ERP must keep the money movement separate from the invoices or other
-obligations it settles.
 
-## Current understanding
-- One invoice may be settled by several partial payments.
-- One bank transfer or cash movement may settle several invoices or obligations.
-- Each application records its amount and leaves the remaining balance visible.
-- Payment proof belongs to the money movement, not merely to `forma_pago`.
+The ERP must follow how the company creates value and incurs cost, not the order
+of modules in a generic ERP.
+
+## Proposed commercial stream
+
+Client need/opportunity -> estimate/proposal -> agreement -> progress or approved
+change -> client invoice -> collection
+
+## Proposed delivery and cost stream
+
+Project established -> plan/budget -> procure/assign -> execute/measure ->
+approve supplier, contractor, or workforce obligation -> payment
+
+Parties, project identity, documents/approvals, and accounting/tax support both
+streams.
 
 ## What we need from you
-Comment **Agree**, or correct the bullets. Please give one recent example of a
-partial payment or one transfer covering several obligations; if this never
-happens, comment **Does not occur**.
+
+Using one real project, tell us the first point where this order becomes wrong or
+incomplete. The developer will record the corrected chain. One exception is
+enough for this meeting.
 
 ## Recorded outcome — maintained by developer
-Pending.
+
+Pending walkthrough.
 ```
 
-**Repository provenance:** BR-011 in
-[business rules](../schema/03-business-rules.md) and the payment requirements in
-[source assessment](../schema/01-source-assessment.md).
+**Completion effect:** Update the primary business chain and identify the first
+workflow boundaries.
 
-### DISC-06 — Decide how a purchase is allocated to project cost
+### DISC-03 — Select the first workflow and its evidence
 
 **Recommended setup**
 
 - Item kind: Business decision
-- Statement class: Uncertainty
-- Business area: Projects; Purchases, payments, and tax
-- Initial status: Draft, then Discuss
-- Decision owner: Accountant with project-cost owner
-- Evidence confidence: Direct source structure, policy unknown
+- Statement class: Business decision
+- Business area: Foundation
+- Initial status: Discuss; use Evidence Needed when the example is named
+- Decision owner: Company owner/administrator
+- Blueprint target: `workflows/`
 
 **Copy-ready description**
 
 ```markdown
 ## Decision needed
-When an invoice belongs to one or more projects, the ERP needs an approved basis
-for the amount distributed to project cost.
 
-## Options to discuss
-- **A — Taxable/base amount**
-- **B — Gross invoice total**
-- **C — Another accounting amount**, such as base plus only non-recoverable tax
+We will model one real workflow end to end before expanding the ERP business
+model. The review needs one normal completed case and one meaningful exception.
 
-The final rule may vary by tax treatment, but it must reconcile to a clearly
-defined invoice amount.
+## Options
+
+- **A — Establish a project and its commercial basis:** most foundational;
+  recommended when a recent project can be explained from its beginning.
+- **B — Purchase to project cost and payment:** strongest current documentary
+  evidence and direct accountant involvement.
+- **C — Contractor work to claim and payment:** high risk because `cubicacion`,
+  deductions, approval, and settlement are still ambiguous.
+- **Another workflow:** acceptable if it is more central and a real example is
+  available.
 
 ## What we need from you
-Choose **A**, **B**, or **C**, or ask for a short accountant review. Also confirm
-whether an unassigned amount may stay in overhead temporarily and who must later
-allocate it.
+
+Choose the workflow, name the people who perform and approve it, and identify one
+normal example plus one exception. You may simply tell us where the documents
+are; the developer will prepare the evidence packet.
 
 ## Recorded decision — maintained by developer
-Pending accounting policy.
-```
 
-**Repository provenance:** cross-row validations and D-08 in
-[business rules](../schema/03-business-rules.md), plus RF-07 in
-[source assessment](../schema/01-source-assessment.md).
-
-## Wave 3 — resolve high-risk document rules
-
-### DISC-07 — Decide how duplicate, corrected, and void NCFs are handled
-
-**Recommended setup**
-
-- Item kind: Business decision
-- Statement class: Uncertainty
-- Business area: Purchases, payments, and tax; Data migration and evidence
-- Initial status: Draft, then Evidence Needed
-- Decision owner: Accountant
-- Evidence confidence: Direct workbooks and extraction audit
-
-**Copy-ready description**
-
-```markdown
-## Why this matters
-The source contains repeated supplier-and-NCF combinations, including copies and
-records that disagree on dates, amounts, or projects. Automatically choosing one
-could corrupt tax and accounting history.
-
-## Current proposal
-- A non-void supplier NCF is normally unique for the operating company.
-- Conflicts stay in review; no row silently overwrites another.
-- Corrections, modified NCFs, and voids preserve their relationship and history.
-
-## What we need from you
-Please attach or identify one real corrected/voided purchase example and confirm
-who may resolve an NCF conflict. Comment **No known example** if necessary.
-
-## Recorded outcome — maintained by developer
-Pending evidence and accountant policy.
-```
-
-**Repository provenance:** RF-03/RF-04 in
-[source assessment](../schema/01-source-assessment.md), BR-010 and D-03 in
-[business rules](../schema/03-business-rules.md).
-
-### DISC-08 — Clarify what a `cubicacion` represents and how it is approved
-
-**Recommended setup**
-
-- Item kind: Terminology
-- Statement class: Uncertainty
-- Business area: Contractors and payroll; Client contracts and billing
-- Initial status: Draft, then Discuss
-- Decision owner: Project/operations owner with accountant
-- Evidence confidence: Indirect extraction plus meeting statements
-
-**Preparation before client review**
-
-Attach one sanitized contractor example and, if available, one client progress
-certification. Do not ask the client to interpret the entire extracted dataset.
-
-**Copy-ready description**
-
-```markdown
-## Term to clarify
-**Cubicacion**
-
-## Current interpretations
-- **A — Contractor claim:** work performed by a contractor that may become
-  payable after review and approval.
-- **B — Client progress certification:** work certified for client billing.
-- **C — Payroll support:** measured work used to calculate worker pay.
-
-These may be separate documents even when the company uses the same word.
-
-## What we need from you
-Label each attached example **A**, **B**, or **C**, and name who prepares,
-reviews, approves, and authorizes payment or billing for it.
-
-## Recorded vocabulary — maintained by developer
 Pending.
 ```
 
-**Repository provenance:** contractor/client distinction in
-[requirements plan](../schema/05-requirements-plan.md) and extracted claim
-coverage in [source assessment](../schema/01-source-assessment.md).
+**Completion effect:** Create the first workflow file from the
+[workflow template](<../../../ERP Domain Blueprint/workflows/TEMPLATE.md>) and
+schedule the responsible participants.
 
-### DISC-09 — Clarify the two-percent contractor deduction
+## Wave 2 — prepare after the meeting
+
+### DISC-04 — Define what makes one project
 
 **Recommended setup**
 
-- Item kind: Business decision
+- Item kind: Concept and lifecycle review
 - Statement class: Uncertainty
-- Business area: Contractors and payroll; Purchases, payments, and tax
-- Initial status: Draft, then Evidence Needed
-- Decision owner: Accountant
-- Evidence confidence: Indirect extraction with reconciliation conflicts
+- Business area: Projects and Contracts
+- Initial status: Draft
+- Decision owner: Project authority
+- Blueprint target: glossary, relationships, project workflow, lifecycle
 
-**Copy-ready description**
+**Client request:** Walk through one project from initial request to closeout and
+correct the distinctions among client, contract, project, site, phase, cost
+center, and raw project code. Name who may create, merge, rename, close, or reopen
+the project.
 
-```markdown
-## What is uncertain
-The extracted claims often contain a two-percent amount, usually written with a
-negative sign. The source does not establish its legal meaning, calculation
-base, eligible parties, rounding, reporting, or exceptions.
+**Evidence to prepare:** one project contract or acceptance record, project
+register entry, budget, source alias examples, and one closed or cancelled case.
 
-## What we need from you
-Please attach one approved claim where the two-percent amount applies and one
-where it does not, if both exist. The accountant should identify the deduction
-type and calculation base.
+### DISC-05 — Identify the authority for each current business record
 
-That is all required; the developer will replay the proposed formula with the
-examples before recording a rule.
+**Recommended setup**
 
-## Recorded result — maintained by developer
-Pending evidence and accountant confirmation.
-```
+- Item kind: System boundary
+- Statement class: Uncertainty
+- Business area: Foundation; Governance and Records
+- Initial status: Draft
+- Decision owner: Owner for each affected area
+- Blueprint target: `foundation/CURRENT-SYSTEMS.md`
 
-**Repository provenance:** RF-10 in
-[source assessment](../schema/01-source-assessment.md), BR-008 and D-04 in
-[business rules](../schema/03-business-rules.md).
+**Client request:** For the selected workflow only, identify where each important
+fact currently lives, who can correct it, and whether that source is an authority,
+working tool, reference, evidence source, or transition source.
 
-## Next batch candidates—not active yet
+Do not attempt to inventory every spreadsheet or application in one meeting.
 
-Do not create these merely to make the backlog look complete. Promote them when
-an owner and a focused question are ready:
+### DISC-06 — Confirm decision authority for the selected workflow
 
-- decide worker/employee/contractor-crew relationships and payroll periods;
-- establish role-based access, especially client read access;
-- define the client contract-to-approval-to-billing lifecycle;
-- approve the 606 field mapping and freeze/correction process;
-- define budget/APU ownership, units, and version approval;
-- define accounting posting, closing, and reversal policy; and
-- decide whether fleet is first release, later, or outside this ERP.
+**Recommended setup**
 
+- Item kind: Relationship and policy review
+- Statement class: Uncertainty
+- Business area: Governance and Records
+- Initial status: Draft
+- Decision owner: Company owner/administrator
+- Blueprint target: `language/ROLES.md` and the selected workflow
+
+**Client request:** For each material decision in the selected workflow, name who
+performs the work, who may approve it, who handles an exception, and who only
+needs to be informed.
+
+Do not translate these roles directly into software permissions yet.
+
+## Deferred schema-derived questions
+
+The previous nine-card batch has been preserved in
+[the deferred schema-validation backlog](07-deferred-schema-validation-backlog.md).
+Items such as legal identity, project aliases, `forma_pago`, partial payments,
+NCF correction, `cubicacion`, and the two-percent deduction remain important.
+They should enter active review when the chosen workflow reaches them, rather
+than dictate the discovery order from the database outward.

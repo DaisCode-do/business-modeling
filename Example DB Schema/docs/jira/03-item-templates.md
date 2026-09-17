@@ -4,13 +4,14 @@ These templates are intentionally short. Copy the relevant template into a JPD
 description, remove sections that do not help the current review, and replace
 bracketed text.
 
-The developer fills the source, current understanding, and recorded outcome.
+The developer fills the source, current understanding, blueprint target, and
+recorded outcome.
 The client normally contributes only a comment, choice, example, or file.
 
-## Requirement confirmation
+## Domain statement confirmation
 
-Use when evidence already suggests a behavior and the responsible owner can
-confirm or correct it.
+Use when evidence already suggests a definition, relationship, boundary, or
+behavior and the responsible owner can confirm or correct it.
 
 ```markdown
 ## Why this matters
@@ -31,9 +32,51 @@ one real exception.
 
 - [Small attachment, Insight, source path, or reachable link.]
 
+## Blueprint target
+
+[Workflow, glossary, relationship, lifecycle, boundary, or decision to update.]
+
 ## Recorded outcome — maintained by developer
 
 Pending.
+```
+
+## Workflow walkthrough
+
+Use to review one end-to-end process through a real normal example and one
+material exception. Complete this primarily during a conversation; do not ask
+the client to write every step.
+
+```markdown
+## Workflow to understand
+
+[Business outcome, not a software feature.]
+
+## Current proposed path
+
+1. [Trigger or initiating fact.]
+2. [Major work and decision points only.]
+3. [Completion condition.]
+
+## What we need from you
+
+Using **[named real example]**, correct the first step that is wrong or missing.
+Then give one exception that materially changes the people, decisions, records,
+or outcome.
+
+## People and evidence
+
+- Process participant: [person/role]
+- Decision owner: [person/role]
+- Evidence location: [safe locator or provider]
+
+## Blueprint target
+
+[Workflow file and affected domains.]
+
+## Recorded outcome — maintained by developer
+
+Pending walkthrough.
 ```
 
 ## Business decision
@@ -168,6 +211,8 @@ it.
 - Exceptions: [none, or concise list]
 - Supersedes: [prior item/comment/version, or none]
 - Next effect: [requirement, business rule, schema, prototype, or no change]
+- Blueprint effect: [file/section updated, or reason no update was needed]
+- Git reference: [branch, commit, or tag when incorporated]
 ```
 
 ## Title rules
