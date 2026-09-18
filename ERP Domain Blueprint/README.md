@@ -9,10 +9,8 @@ Constructora Angote's business domain. Its intended downstream product is an ERP
 an internal operational system that connects the company's domains without
 forcing the business into the assumptions of the earlier database prototype.
 
-The **documentation method is reusable; the populated model is not**. EduGuiders
-provided a useful worked example of the structure, but none of its education
-concepts or policies should be copied here. This directory must become a
-construction-company model through Constructora evidence and client validation.
+The **documentation method is reusable; the populated model is not**. This directory
+must become a construction-company model through Constructora evidence and client validation.
 
 The documentation defines the business before anyone defines software. It describes:
 
